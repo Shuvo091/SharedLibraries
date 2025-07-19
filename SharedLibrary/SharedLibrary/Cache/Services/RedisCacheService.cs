@@ -121,7 +121,5 @@ namespace SharedLibrary.Cache.Services
                 throw new InvalidOperationException($"Failed to get TTL for key '{key}'", ex);
             }
         }
-
-
     }
 } 

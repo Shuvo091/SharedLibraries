@@ -51,7 +51,5 @@ namespace SharedLibrary.Cache.Services.Interfaces
         /// <param name="key">Cache key</param>
         /// <returns>TimeSpan representing TTL or null if key doesn't exist</returns>
         Task<TimeSpan?> GetTimeToLiveAsync(string key);
-
-
     }
 } 
