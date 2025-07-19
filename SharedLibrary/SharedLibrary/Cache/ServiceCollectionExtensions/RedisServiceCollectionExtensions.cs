@@ -32,7 +32,7 @@ namespace SharedLibrary.Cache.ServiceCollectionExtensions
 
             services.AddSingleton<IConnectionMultiplexer>(provider =>
             {
-                var logger = provider.GetRequiredService<ILogger>();
+                var logger = provider.GetRequiredService<ILogger<RedisCacheService>>();
                 return RedisConnectionFactory.GetConnection(redisConfig, logger);
             });
 

@@ -33,7 +33,7 @@ Add Redis configuration to your `appsettings.json`:
 ```json
 {
   "Redis": {
-    "ConnectionString": "redis://default@localhost:6379",
+    "ConnectionString": "localhost:6379",
     "DatabaseId": 0,
     "ConnectTimeout": 60000,
     "SyncTimeout": 60000,
