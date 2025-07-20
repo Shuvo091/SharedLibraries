@@ -14,4 +14,11 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RequestResponseModels\Workflow\" />
+    <Folder Include="RequestResponseModels\Transcription\" />
+    <Folder Include="RequestResponseModels\Usermanagement\" />
+    <Folder Include="RequestResponseModels\QA\" />
+  </ItemGroup>
+
 </Project>
