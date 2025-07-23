@@ -8,18 +8,16 @@ public class ThreeWayEloUpdateRequest
 	public Guid TiebreakerComparisonId { get; set; }
 	public string WorkflowRequestId { get; set; } = default!;
 	public List<ThreeWayEloChange> ThreeWayEloChanges { get; set; } = [];
-	public TiebreakerBonus TiebreakerBonus { get; set; } = new();
 }
 
 public class ThreeWayEloChange
 {
 	public Guid TranscriberId { get; set; }
-	public Guid? OpponentId2 { get; set; }
-	public Guid OppenentId { get; set; }
 	public string Role { get; set; } = default!;
 	public string Outcome { get; set; } = default!; // e.g. win, loss, draw
 	public int EloChange { get; set; } 
 	public int NewElo { get; set; }
+	public TiebreakerBonus? TiebreakerBonus { get; set; }
 }
 
 public class TiebreakerBonus
