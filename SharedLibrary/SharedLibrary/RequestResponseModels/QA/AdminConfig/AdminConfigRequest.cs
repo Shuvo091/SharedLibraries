@@ -7,7 +7,7 @@ namespace SharedLibrary.RequestResponseModels.QA.AdminConfig
         public ComparisonWorkflowConfig? ComparisonWorkflowConfig { get; set; }
         public EloCalculationConfig? EloCalculationConfig { get; set; }
         public OpenaiIntegrationConfig? OpenaiIntegrationConfig { get; set; }
-        public TieBreakerConfig? TieBreakerConfig { get; set; }
+        public TiebreakerConfig? TiebreakerConfig { get; set; }
         public ProfessionalQaConfig? ProfessionalQaConfig { get; set; }
     }
 }
@@ -18,7 +18,7 @@ namespace SharedLibrary.RequestResponseModels.QA.AdminConfig.SupportingModels
     {
         public bool? OpenaiScoringEnabled { get; set; }
         public double? OpenaiConfidenceThreshold { get; set; }
-        public double? TieBreakerThreshold { get; set; }
+        public double? TiebreakerThreshold { get; set; }
         public double? SimilarityThreshold { get; set; }
         public bool? AutoProcessingEnabled { get; set; }
     }
@@ -55,7 +55,7 @@ namespace SharedLibrary.RequestResponseModels.QA.AdminConfig.SupportingModels
         public bool? FallbackEnabled { get; set; }
     }
 
-    public class TieBreakerConfig
+    public class TiebreakerConfig
     {
         public string? MaxTiebreakerWaitTime { get; set; }
         public string? ThirdTranscriberPriority { get; set; }
