@@ -5,7 +5,7 @@ using System.Text.Json;
 namespace SharedLibrary.Cache.Services
 {
     /// <summary>
-    /// Redis implementation of the cache service
+    /// Redis implementation of the cache service.
     /// </summary>
     public class RedisCacheService : ICacheService
     {
