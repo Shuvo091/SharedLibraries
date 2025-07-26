@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="RequestResponseModels\Workflow\" />
-    <Folder Include="RequestResponseModels\Transcription\" />
     <Folder Include="RequestResponseModels\QA\" />
   </ItemGroup>
 

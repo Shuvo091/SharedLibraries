@@ -11,5 +11,19 @@ public enum GameOutcomeType
 	Loss,
 
 	[Display(Name = "draw")]
-	Draw
+	Draw,
+
+	// For Three way
+	[Display(Name = "minority_winner")]
+	MinorityWinner,
+
+	[Display(Name = "majority_winner")]
+	MajorityWinner,
+
+	[Display(Name = "minority_loser")]
+	MinorityLoser,
+
+	[Display(Name = "majority_loser")]
+	MajorityLoser,
+
 }
