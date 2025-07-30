@@ -59,7 +59,7 @@ namespace SharedLibrary.RequestResponseModels.QA.AdminConfig.SupportingModels
     {
         public string? MaxTiebreakerWaitTime { get; set; }
         public string? ThirdTranscriberPriority { get; set; }
-        public double TiebreakerEloBonus { get; set; }
+        public double? TiebreakerEloBonus { get; set; }
     }
 
     public class ProfessionalQaConfig

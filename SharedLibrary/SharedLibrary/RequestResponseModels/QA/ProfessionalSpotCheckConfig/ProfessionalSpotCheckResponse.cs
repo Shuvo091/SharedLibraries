@@ -8,7 +8,7 @@ public class ProfessionalSpotCheckResponse
     public required string EffectiveFrom { get; set; }
 }
 
-public class  EstimatedCost
+public class EstimatedCost
 {
     public double DailyEstimate { get; set; }
     public double MonthlyEstimate { get; set; }
