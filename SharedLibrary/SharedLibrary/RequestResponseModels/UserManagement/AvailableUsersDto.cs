@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.RequestResponseModels.UserManagement;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SharedLibrary.RequestResponseModels.UserManagement;
 
 #region All User Availability Response 
 
@@ -29,9 +31,15 @@ public class AvailableUsersDto
 
 public class UserAvailabilityUpdateRequest
 {
-    public string Status { get; set; } = default!;
-    public int MaxConcurrentJobs { get; set; } = 3;
-    public string Notes { get; set; } = default!;
+	[Required]
+	[RegularExpression("available|busy|offline|leave", ErrorMessage = "Status must be 'available', 'busy', 'offline', or 'leave'.")]
+	public string Status { get; set; } = default!;
+
+	[Range(1, 10, ErrorMessage = "MaxConcurrentJobs must be between 1 and 10.")]
+	public int MaxConcurrentJobs { get; set; } = 3;
+
+	[MaxLength(500, ErrorMessage = "Notes can't exceed 500 characters.")]
+	public string? Notes { get; set; }
 }
 
 #endregion

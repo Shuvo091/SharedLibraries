@@ -1,34 +1,48 @@
-﻿namespace SharedLibrary.RequestResponseModels.UserManagement;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SharedLibrary.RequestResponseModels.UserManagement;
 
 
 #region Verification Request
 
 public class VerificationRequest
 {
-    public string VerificationType { get; set; } = default!;
-    public IdDocumentValidationDto IdDocumentValidation { get; set; } = new IdDocumentValidationDto();
-    public AdditionalVerificationDto AdditionalVerification { get; set; } = new AdditionalVerificationDto();
+	[Required(ErrorMessage = "VerificationType is required.")]
+	[MinLength(1, ErrorMessage = "VerificationType cannot be empty.")]
+	public string VerificationType { get; set; } = string.Empty;
+
+	[Required(ErrorMessage = "IdDocumentValidation is required.")]
+	public IdDocumentValidationDto IdDocumentValidation { get; set; } = new IdDocumentValidationDto();
+
+	[Required(ErrorMessage = "AdditionalVerification is required.")]
+	public AdditionalVerificationDto AdditionalVerification { get; set; } = new AdditionalVerificationDto();
 }
 
 public class IdDocumentValidationDto
 {
-    public bool Enabled { get; set; }
-    public string IdNumber { get; set; } = default!;
-    public bool PhotoUploaded { get; set; }
-    public ValidationResultDto ValidationResult { get; set; } = new ValidationResultDto();
+	public bool Enabled { get; set; }
+
+	[Required(ErrorMessage = "IdNumber is required when validation is enabled.")]
+	[MinLength(1, ErrorMessage = "IdNumber cannot be empty.")]
+	public string IdNumber { get; set; } = string.Empty;
+
+	public bool PhotoUploaded { get; set; }
+
+	[Required(ErrorMessage = "ValidationResult is required.")]
+	public ValidationResultDto ValidationResult { get; set; } = new ValidationResultDto();
 }
 
 public class ValidationResultDto
 {
-    public bool IdFormatValid { get; set; }
-    public bool PhotoPresent { get; set; }
-    public string? Note { get; set; }
+	public bool IdFormatValid { get; set; }
+	public bool PhotoPresent { get; set; }
+	public string? Note { get; set; }
 }
 
 public class AdditionalVerificationDto
 {
-    public bool PhoneVerification { get; set; }
-    public bool EmailVerification { get; set; }
+	public bool PhoneVerification { get; set; }
+	public bool EmailVerification { get; set; }
 }
 
 #endregion
