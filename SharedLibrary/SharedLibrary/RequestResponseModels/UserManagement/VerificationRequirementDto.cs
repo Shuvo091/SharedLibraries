@@ -10,13 +10,13 @@ namespace SharedLibrary.RequestResponseModels.UserManagement;
 
 public class UpdateVerificationRequirementsRequest
 {
-	public bool RequireIdDocument { get; set; }
-	public bool RequirePhotoUpload { get; set; }
-	public bool RequirePhoneVerification { get; set; }
-	public bool RequireEmailVerification { get; set; }
-	public string VerificationLevel { get; set; } = default!;
-	public Dictionary<string, string> ValidationRules { get; set; } = [];
-	public string Reason { get; set; } = default!;
+    public bool RequireIdDocument { get; set; }
+    public bool RequirePhotoUpload { get; set; }
+    public bool RequirePhoneVerification { get; set; }
+    public bool RequireEmailVerification { get; set; }
+    public string VerificationLevel { get; set; } = default!;
+    public Dictionary<string, string> ValidationRules { get; set; } = [];
+    public string Reason { get; set; } = default!;
 }
 
 #endregion
@@ -25,12 +25,12 @@ public class UpdateVerificationRequirementsRequest
 
 public class UpdateVerificationRequirementsResponse
 {
-	public bool RequirementsUpdated { get; set; }
-	public bool PiiDataCollection { get; set; }
-	public string ComplianceMode { get; set; } = default!;
-	public string VerificationLevel { get; set; } = default!;
-	public List<string> VerificationSteps { get; set; } = [];
-	public Dictionary<string, string> RoadmapEnhancements { get; set; } = [];
+    public bool RequirementsUpdated { get; set; }
+    public bool PiiDataCollection { get; set; }
+    public string ComplianceMode { get; set; } = default!;
+    public string VerificationLevel { get; set; } = default!;
+    public List<string> VerificationSteps { get; set; } = [];
+    public Dictionary<string, string> RoadmapEnhancements { get; set; } = [];
 }
 
 #endregion

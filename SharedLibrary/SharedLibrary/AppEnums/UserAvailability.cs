@@ -4,15 +4,15 @@ namespace SharedLibrary.AppEnums;
 
 public enum UserAvailabilityType
 {
-	[Display(Name = "available")]
-	Available,
+    [Display(Name = "available")]
+    Available,
 
-	[Display(Name = "busy")]
-	Busy,
+    [Display(Name = "busy")]
+    Busy,
 
-	[Display(Name = "offline")]
-	Offline,
+    [Display(Name = "offline")]
+    Offline,
 
-	[Display(Name = "leave")]
-	Leave
+    [Display(Name = "leave")]
+    Leave
 }

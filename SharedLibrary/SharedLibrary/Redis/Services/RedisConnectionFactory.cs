@@ -35,7 +35,7 @@ namespace SharedLibrary.Cache.Services
                 options.SyncTimeout = redisConfiguration.SyncTimeout;
 
                 _connection = ConnectionMultiplexer.Connect(options);
-                
+
                 _connection.ConnectionFailed += (sender, e) =>
                 {
                     logger.LogError(e.Exception, "Redis connection failed: {Message}", e.Exception?.Message);

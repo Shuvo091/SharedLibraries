@@ -32,7 +32,7 @@ namespace SharedLibrary.Cache.Services
                     throw new ArgumentException("Key cannot be null or empty", nameof(key));
 
                 var value = await _database.StringGetAsync(key);
-                
+
                 if (!value.HasValue)
                     return default;
 
@@ -52,7 +52,7 @@ namespace SharedLibrary.Cache.Services
                     throw new ArgumentException("Key cannot be null or empty", nameof(key));
 
                 var serializedValue = JsonSerializer.Serialize(value, _jsonOptions);
-                
+
                 return await _database.StringSetAsync(key, serializedValue, expiration);
             }
             catch (Exception ex)
@@ -122,4 +122,4 @@ namespace SharedLibrary.Cache.Services
             }
         }
     }
-} 
+}

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SharedLibrary.AppEnums
 {
-	public enum VerificationType
-	{
-		[Display(Name = "id_document")]
-		IdDocument
-	}
+    public enum VerificationType
+    {
+        [Display(Name = "id_document")]
+        IdDocument
+    }
 }

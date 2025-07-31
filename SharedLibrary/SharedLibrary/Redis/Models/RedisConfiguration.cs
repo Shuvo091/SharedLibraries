@@ -35,4 +35,4 @@ namespace SharedLibrary.Cache.Models
         /// </summary>
         public int ReconnectRetryPolicy { get; set; } = 3;
     }
-} 
+}
