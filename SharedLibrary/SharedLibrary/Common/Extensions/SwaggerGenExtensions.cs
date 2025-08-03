@@ -1,63 +1,53 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using SharedLibrary.Common.Options;
 
 namespace SharedLibrary.Common.Extensions;
 
 /// <summary>
-/// Extension methods for configuring Swagger generation with OAuth support in ASP.NET Core applications.
+/// Swagger generation extension.
 /// </summary>
 public static class SwaggerGenExtensions
 {
     /// <summary>
-    /// Registers Swagger generation services with OAuth2 support in the dependency injection container.
+    /// Swagger service extension for builder.
     /// </summary>
-    /// <param name="services"> service to extend. </param>
-    /// <param name="config"> base cofig. </param>
-    /// <returns> returns augmented collection. </returns>
-    public static IServiceCollection AddSwaggerGenWithOAuth(this IServiceCollection services, IConfiguration config)
+    /// <param name="services"> builder.Service from program. </param>
+    /// <returns>Returns the service collection. </returns>
+    public static IServiceCollection AddSwaggerGenWithJwt(this IServiceCollection services)
     {
-        var identity = config.GetSection("IdentityServer").Get<IdentityServerOptions>() !;
         services.AddSwaggerGen(options =>
         {
-            options.SwaggerDoc("v1", new OpenApiInfo { Title = "User Management API", Version = "v1" });
-
-            options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+            options.SwaggerDoc("v1", new OpenApiInfo
             {
-                Type = SecuritySchemeType.OAuth2,
-                Description = "OAuth2 Authorization Code flow with PKCE",
-                Flows = new OpenApiOAuthFlows
-                {
-                    AuthorizationCode = new OpenApiOAuthFlow
-                    {
-                        AuthorizationUrl = new Uri($"{identity.Authority.TrimEnd('/')}/connect/authorize"),
-                        TokenUrl = new Uri($"{identity.Authority.TrimEnd('/')}/connect/token"),
-                        Scopes = new Dictionary<string, string>
-                        {
-                            { "openid", "OpenID Connect" },
-                            { "profile", "User profile" },
-                            { "api", "Access CohesionX User Management API" },
-                            { "offline_access", "Refresh Token Support" },
-                            { "role", "Role-based authorization" },
-                        },
-                    },
-                },
+                Title = "CohensionX API",
+                Version = "v1",
             });
 
+            // Define the JWT Bearer security scheme
+            var jwtSecurityScheme = new OpenApiSecurityScheme
+            {
+                Scheme = "bearer",
+                BearerFormat = "JWT",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Description = "JWT Authorization header using the Bearer scheme. Example: 'Bearer {token}'",
+                Reference = new OpenApiReference
+                {
+                    Id = JwtBearerDefaults.AuthenticationScheme,
+                    Type = ReferenceType.SecurityScheme,
+                },
+            };
+
+            options.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+            // Require JWT token for all endpoints
             options.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
                 {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "oauth2",
-                        },
-                    },
-                    new[] { "openid", "profile", "api", "offline_access", "role" }
+                    jwtSecurityScheme, Array.Empty<string>()
                 },
             });
         });
@@ -66,23 +56,14 @@ public static class SwaggerGenExtensions
     }
 
     /// <summary>
-    /// Configures Swagger UI with OAuth2 support in the ASP.NET Core application pipeline.
+    /// Swagger UI use.
     /// </summary>
-    /// <param name="app"> app to extend. </param>
-    /// <param name="config"> base cofig. </param>
-    public static void UseSwaggerUIWithOAuth(this IApplicationBuilder app, IConfiguration config)
+    /// <param name="app"> app from program.cs. </param>
+    public static void UseSwaggerUIWithJwt(this IApplicationBuilder app)
     {
-        var identity = config.GetSection("IdentityServer").Get<IdentityServerOptions>() !;
         app.UseSwaggerUI(options =>
         {
-            options.OAuthClientId("swagger.api");
-            options.OAuthUsePkce();
-            options.OAuthScopeSeparator(" ");
-            options.OAuth2RedirectUrl("https://localhost:7039/swagger/oauth2-redirect.html");
-            options.OAuthAdditionalQueryStringParams(new Dictionary<string, string>
-            {
-                { "audience", identity.ApiName },
-            });
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "CohensionX API v1");
         });
     }
 }
