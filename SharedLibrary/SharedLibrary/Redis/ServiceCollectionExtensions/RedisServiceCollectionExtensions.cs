@@ -11,13 +11,17 @@ using StackExchange.Redis;
 namespace SharedLibrary.Cache.ServiceCollectionExtensions
 {
     /// <summary>
-    /// Extension methods for IServiceCollection to configure Redis caching
+    /// Extension methods for IServiceCollection to configure Redis caching.
     /// </summary>
     public static class RedisServiceCollectionExtensions
     {
         /// <summary>
         /// Adds Redis necessaries to the service collection.
         /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/> to which the Redis queue service will be added.</param>
+        /// <param name="configuration">The application configuration containing the Redis settings.</param>
+        /// <param name="sectionName">The name of the configuration section that contains the Redis settings.  Defaults to "Redis".</param>
+        /// <returns>The service collection for chaining.</returns>
         public static IServiceCollection AddRedis(
             this IServiceCollection services,
             IConfiguration configuration,
@@ -43,8 +47,8 @@ namespace SharedLibrary.Cache.ServiceCollectionExtensions
         /// <summary>
         /// Adds Redis caching services to the service collection.
         /// </summary>
-        /// <param name="services">The service collection</param>
-        /// <returns>The service collection for chaining</returns>
+        /// <param name="services">The service collection.</param>
+        /// <returns>The service collection for chaining.</returns>
         public static IServiceCollection AddRedisCache(this IServiceCollection services)
         {
             services.AddSingleton<ICacheService, CacheService>();

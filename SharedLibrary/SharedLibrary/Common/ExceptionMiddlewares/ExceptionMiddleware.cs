@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using System.Net;
+﻿using System.Net;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace SharedLibrary.Common.ExceptionMiddlewares;
 
@@ -33,11 +33,11 @@ public class ExceptionMiddleware
     {
         try
         {
-            await next(context);
+            await this.next(context);
         }
         catch (Exception ex)
         {
-            logger.LogError($"Something went wrong: {ex}");
+            this.logger.LogError($"Something went wrong: {ex}");
             await HandleExceptionAsync(context, ex);
         }
     }

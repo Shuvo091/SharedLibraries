@@ -5,28 +5,32 @@ using StackExchange.Redis;
 namespace SharedLibrary.Cache.Services
 {
     /// <summary>
-    /// Factory class for creating and managing Redis connections
+    /// Factory class for creating and managing Redis connections.
     /// </summary>
     public static class RedisConnectionFactory
     {
-        private static IConnectionMultiplexer? _connection;
-        private static readonly object _lock = new object();
+        private static readonly object Lock = new object();
+        private static IConnectionMultiplexer? connection;
 
         /// <summary>
-        /// Gets or creates a Redis connection with the specified configuration
+        /// Gets or creates a Redis connection with the specified configuration.
         /// </summary>
-        /// <param name="redisConfiguration">Redis configuration object</param>
-        /// <param name="logger">Logger instance</param>
-        /// <returns>Redis connection multiplexer</returns>
+        /// <param name="redisConfiguration">Redis configuration object.</param>
+        /// <param name="logger">Logger instance.</param>
+        /// <returns>Redis connection multiplexer.</returns>
         public static IConnectionMultiplexer GetConnection(RedisConfiguration redisConfiguration, ILogger logger)
         {
-            if (_connection != null && _connection.IsConnected)
-                return _connection;
-
-            lock (_lock)
+            if (connection != null && connection.IsConnected)
             {
-                if (_connection != null && _connection.IsConnected)
-                    return _connection;
+                return connection;
+            }
+
+            lock (Lock)
+            {
+                if (connection != null && connection.IsConnected)
+                {
+                    return connection;
+                }
 
                 var options = ConfigurationOptions.Parse(redisConfiguration.ConnectionString);
                 options.ConnectRetry = redisConfiguration.ConnectRetry;
@@ -34,32 +38,32 @@ namespace SharedLibrary.Cache.Services
                 options.ConnectTimeout = redisConfiguration.ConnectTimeout;
                 options.SyncTimeout = redisConfiguration.SyncTimeout;
 
-                _connection = ConnectionMultiplexer.Connect(options);
+                connection = ConnectionMultiplexer.Connect(options);
 
-                _connection.ConnectionFailed += (sender, e) =>
+                connection.ConnectionFailed += (sender, e) =>
                 {
                     logger.LogError(e.Exception, "Redis connection failed: {Message}", e.Exception?.Message);
                 };
 
-                _connection.ConnectionRestored += (sender, e) =>
+                connection.ConnectionRestored += (sender, e) =>
                 {
                     logger.LogInformation("Redis connection restored");
                 };
 
-                return _connection;
+                return connection;
             }
         }
 
         /// <summary>
-        /// Disposes the current Redis connection
+        /// Disposes the current Redis connection.
         /// </summary>
         public static void DisposeConnection()
         {
-            lock (_lock)
+            lock (Lock)
             {
-                _connection?.Close();
-                _connection?.Dispose();
-                _connection = null;
+                connection?.Close();
+                connection?.Dispose();
+                connection = null;
             }
         }
     }

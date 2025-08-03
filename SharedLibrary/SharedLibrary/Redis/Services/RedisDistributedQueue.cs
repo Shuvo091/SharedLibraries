@@ -4,37 +4,47 @@ using StackExchange.Redis;
 namespace SharedLibrary.Redis.Services
 {
     /// <summary>
-    /// Redis implementation of IDistributedQueue
+    /// Redis implementation of IDistributedQueue.
     /// </summary>
     public class RedisDistributedQueue : IDistributedQueue
     {
-        private readonly IDatabase _database;
+        private readonly IDatabase database;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RedisDistributedQueue"/> class,  which provides a distributed
+        /// queue implementation using Redis.
+        /// </summary>
+        /// <param name="connectionMultiplexer">The connection multiplexer used to connect to the Redis server.</param>
+        /// <param name="databaseId">The ID of the Redis database to use. Defaults to 0 if not specified.</param>
         public RedisDistributedQueue(IConnectionMultiplexer connectionMultiplexer, int databaseId = 0)
         {
-            _database = connectionMultiplexer.GetDatabase(databaseId);
+            this.database = connectionMultiplexer.GetDatabase(databaseId);
         }
 
+        /// <inheritdoc/>
         public Task<string?> ListGetByIndexAsync(string key, long index)
         {
-            return _database.ListGetByIndexAsync(key, index).ContinueWith(t => 
+            return this.database.ListGetByIndexAsync(key, index).ContinueWith(t =>
                 t.Result.HasValue ? t.Result.ToString() : null);
         }
 
+        /// <inheritdoc/>
         public Task<long> ListLengthAsync(string key)
-            => _database.ListLengthAsync(key);
+            => this.database.ListLengthAsync(key);
 
+        /// <inheritdoc/>
         public Task<string?> ListLeftPopAsync(string key)
         {
-            return _database.ListLeftPopAsync(key).ContinueWith(t => 
+            return this.database.ListLeftPopAsync(key).ContinueWith(t =>
                 t.Result.HasValue ? t.Result.ToString() : null);
         }
 
+        /// <inheritdoc/>
         public Task<long> ListRightPushAsync(string key, string value)
-            => _database.ListRightPushAsync(key, value);
+            => this.database.ListRightPushAsync(key, value);
 
+        /// <inheritdoc/>
         public Task<bool> KeyDeleteAsync(string key)
-            => _database.KeyDeleteAsync(key);
-
+            => this.database.KeyDeleteAsync(key);
     }
 }

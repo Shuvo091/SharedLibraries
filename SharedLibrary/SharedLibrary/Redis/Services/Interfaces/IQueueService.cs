@@ -8,6 +8,7 @@ public interface IQueueService
     /// <summary>
     /// Enqueues an item to the specified queue.
     /// </summary>
+    /// <typeparam name="T">The type of the item to enqueue.</typeparam>
     /// <param name="queueName">The name of the queue.</param>
     /// <param name="item">The item to enqueue.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
@@ -16,6 +17,7 @@ public interface IQueueService
     /// <summary>
     /// Dequeues an item from the specified queue.
     /// </summary>
+    /// <typeparam name="T">The type of the item to dequeue.</typeparam>
     /// <param name="queueName">The name of the queue.</param>
     /// <returns>The dequeued item, or null if the queue is empty.</returns>
     Task<T?> DequeueAsync<T>(string queueName);
@@ -30,6 +32,7 @@ public interface IQueueService
     /// <summary>
     /// Peeks at the next item in the specified queue without removing it.
     /// </summary>
+    /// <typeparam name="T">The type of the item to peek.</typeparam>
     /// <param name="queueName">The name of the queue.</param>
     /// <returns>The next item in the queue, or null if the queue is empty.</returns>
     Task<T?> PeekAsync<T>(string queueName);

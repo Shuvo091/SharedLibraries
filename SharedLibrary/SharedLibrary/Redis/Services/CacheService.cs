@@ -1,6 +1,6 @@
+using System.Text.Json;
 using Microsoft.Extensions.Caching.Distributed;
 using SharedLibrary.Cache.Services.Interfaces;
-using System.Text.Json;
 
 namespace SharedLibrary.Cache.Services
 {
@@ -9,32 +9,41 @@ namespace SharedLibrary.Cache.Services
     /// </summary>
     public class CacheService : ICacheService
     {
-        private readonly IDistributedCache _cache;
-        private readonly JsonSerializerOptions _jsonOptions;
+        private readonly IDistributedCache cache;
+        private readonly JsonSerializerOptions jsonOptions;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CacheService"/> class.
+        /// </summary>
+        /// <param name="cache">The distributed cache instance.</param>
         public CacheService(IDistributedCache cache)
         {
-            _cache = cache ?? throw new ArgumentNullException(nameof(cache));
-            _jsonOptions = new JsonSerializerOptions
+            this.cache = cache ?? throw new ArgumentNullException(nameof(cache));
+            this.jsonOptions = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = false
+                WriteIndented = false,
             };
         }
 
+        /// <inheritdoc/>
         public async Task<T?> GetAsync<T>(string key)
         {
             try
             {
                 if (string.IsNullOrEmpty(key))
+                {
                     throw new ArgumentException("Key cannot be null or empty", nameof(key));
+                }
 
-                var value = await _cache.GetStringAsync(key);
+                var value = await this.cache.GetStringAsync(key);
 
                 if (value == null)
+                {
                     return default;
+                }
 
-                return JsonSerializer.Deserialize<T>(value, _jsonOptions);
+                return JsonSerializer.Deserialize<T>(value, this.jsonOptions);
             }
             catch (Exception ex)
             {
@@ -42,22 +51,25 @@ namespace SharedLibrary.Cache.Services
             }
         }
 
+        /// <inheritdoc/>
         public async Task SetAsync<T>(string key, T value, TimeSpan? expiration = null)
         {
             try
             {
                 if (string.IsNullOrEmpty(key))
+                {
                     throw new ArgumentException("Key cannot be null or empty", nameof(key));
+                }
 
-                var serializedValue = JsonSerializer.Serialize(value, _jsonOptions);
+                var serializedValue = JsonSerializer.Serialize(value, this.jsonOptions);
                 var options = new DistributedCacheEntryOptions();
-                
+
                 if (expiration.HasValue)
                 {
                     options.AbsoluteExpirationRelativeToNow = expiration.Value;
                 }
 
-                await _cache.SetStringAsync(key, serializedValue, options);
+                await this.cache.SetStringAsync(key, serializedValue, options);
             }
             catch (Exception ex)
             {
@@ -65,14 +77,17 @@ namespace SharedLibrary.Cache.Services
             }
         }
 
+        /// <inheritdoc/>
         public async Task RemoveAsync(string key)
         {
             try
             {
                 if (string.IsNullOrEmpty(key))
+                {
                     throw new ArgumentException("Key cannot be null or empty", nameof(key));
+                }
 
-                await _cache.RemoveAsync(key);
+                await this.cache.RemoveAsync(key);
             }
             catch (Exception ex)
             {
@@ -80,14 +95,17 @@ namespace SharedLibrary.Cache.Services
             }
         }
 
+        /// <inheritdoc/>
         public async Task<bool> ExistsAsync(string key)
         {
             try
             {
                 if (string.IsNullOrEmpty(key))
+                {
                     throw new ArgumentException("Key cannot be null or empty", nameof(key));
+                }
 
-                var value = await _cache.GetAsync(key);
+                var value = await this.cache.GetAsync(key);
                 return value != null;
             }
             catch (Exception ex)
@@ -96,21 +114,26 @@ namespace SharedLibrary.Cache.Services
             }
         }
 
+        /// <inheritdoc/>
         public async Task SetExpirationAsync(string key, TimeSpan expiration)
         {
             try
             {
                 if (string.IsNullOrEmpty(key))
+                {
                     throw new ArgumentException("Key cannot be null or empty", nameof(key));
+                }
 
-                var value = await _cache.GetAsync(key);
+                var value = await this.cache.GetAsync(key);
 
                 if (value == null)
-                    throw new Exception("Key doesn't exist in the cache.");
-
-                await _cache.SetAsync(key, value, new DistributedCacheEntryOptions
                 {
-                    AbsoluteExpirationRelativeToNow = expiration
+                    throw new Exception("Key doesn't exist in the cache.");
+                }
+
+                await this.cache.SetAsync(key, value, new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = expiration,
                 });
             }
             catch (Exception ex)
