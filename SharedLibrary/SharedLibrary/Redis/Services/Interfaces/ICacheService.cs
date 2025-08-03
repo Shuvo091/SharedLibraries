@@ -21,14 +21,14 @@ namespace SharedLibrary.Cache.Services.Interfaces
         /// <param name="value">Value to cache</param>
         /// <param name="expiration">Optional expiration time</param>
         /// <returns>True if operation was successful</returns>
-        Task<bool> SetAsync<T>(string key, T value, TimeSpan? expiration = null);
+        Task SetAsync<T>(string key, T value, TimeSpan? expiration = null);
 
         /// <summary>
         /// Removes a value from cache by key
         /// </summary>
         /// <param name="key">Cache key</param>
         /// <returns>True if key was found and removed</returns>
-        Task<bool> RemoveAsync(string key);
+        Task RemoveAsync(string key);
 
         /// <summary>
         /// Checks if a key exists in cache
@@ -43,13 +43,6 @@ namespace SharedLibrary.Cache.Services.Interfaces
         /// <param name="key">Cache key</param>
         /// <param name="expiration">Expiration time</param>
         /// <returns>True if operation was successful</returns>
-        Task<bool> SetExpirationAsync(string key, TimeSpan expiration);
-
-        /// <summary>
-        /// Gets the time to live for a key
-        /// </summary>
-        /// <param name="key">Cache key</param>
-        /// <returns>TimeSpan representing TTL or null if key doesn't exist</returns>
-        Task<TimeSpan?> GetTimeToLiveAsync(string key);
+        Task SetExpirationAsync(string key, TimeSpan expiration);
     }
 }
