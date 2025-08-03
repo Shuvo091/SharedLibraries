@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.RequestResponseModels.QA.AdminConfig;
+﻿using SharedLibrary.Contracts.QA.Requests;
+
+namespace SharedLibrary.Contracts.QA.Responses;
 
 /// <summary>
 /// Represents the response for an admin configuration get request.

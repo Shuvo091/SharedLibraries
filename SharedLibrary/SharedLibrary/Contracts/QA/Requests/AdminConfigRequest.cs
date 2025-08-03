@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.RequestResponseModels.QA.AdminConfig;
+﻿namespace SharedLibrary.Contracts.QA.Requests;
 
 /// <summary>
 /// Represents the request for admin configuration.

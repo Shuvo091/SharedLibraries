@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.RequestResponseModels.QA.ProfessionalSpotCheckConfig;
+﻿namespace SharedLibrary.Contracts.QA.Requests;
 
 /// <summary>
 /// Represents a request to configure professional spot checks.

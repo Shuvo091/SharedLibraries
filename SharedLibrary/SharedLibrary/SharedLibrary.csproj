@@ -14,9 +14,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="RequestResponseModels\Workflow\**" />
-    <EmbeddedResource Remove="RequestResponseModels\Workflow\**" />
-    <None Remove="RequestResponseModels\Workflow\**" />
+    <Compile Remove="Contracts\Workflow\**" />
+    <EmbeddedResource Remove="Contracts\Workflow\**" />
+    <None Remove="Contracts\Workflow\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,10 +56,6 @@
 	<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
 	<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
 	<PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="RequestResponseModels\QA\" />
   </ItemGroup>
 
 </Project>
