@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace SharedLibrary.Common.Extensions;
@@ -16,6 +17,8 @@ public static class LogExtension
     {
         hostBuilder.UseSerilog((context, services, configuration) =>
         {
+            var applicationName = context.Configuration.GetValue<string>("Application", "UnknownApp");
+
             configuration
                 .ReadFrom.Configuration(context.Configuration)
                 .ReadFrom.Services(services)
@@ -23,7 +26,7 @@ public static class LogExtension
                 .Enrich.WithMachineName()
                 .Enrich.WithEnvironmentName()
                 .Enrich.WithThreadId()
-                .Enrich.WithProperty("Application", "CohesionX.UserManagement")
+                .Enrich.WithProperty("Application", applicationName)
                 .WriteTo.Console()
                 .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day);
         });
