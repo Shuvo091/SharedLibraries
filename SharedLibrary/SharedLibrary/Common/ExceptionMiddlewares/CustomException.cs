@@ -1,44 +1,63 @@
-﻿using System.Globalization;
+﻿using System.Net;
 
 namespace SharedLibrary.Common.ExceptionMiddlewares;
 
 /// <summary>
-/// Represents a custom exception for the transcription service.
+/// Represents a structured application-level exception with optional HTTP status code.
 /// </summary>
 public class CustomException : Exception
 {
-    /// <summary>Initializes a new instance of the <see cref="CustomException"/> class.</summary>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CustomException"/> class with a specified error message and HTTP status code.
+    /// </summary>
+    /// <param name="message"> message. </param>
+    /// <param name="statusCode"> code. </param>
+    public CustomException(string message, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
+        : base(message)
+    {
+        this.StatusCode = statusCode;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CustomException"/> class with a specified error message, an inner exception, and an HTTP status code.
+    /// </summary>
+    /// <param name="message"> message. </param>
+    /// <param name="inner"> inner. </param>
+    /// <param name="statusCode"> code. </param>
+    public CustomException(string message, Exception inner, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
+        : base(message, inner)
+    {
+        this.StatusCode = statusCode;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CustomException"/> class with no error message or HTTP status code.
+    /// </summary>
     public CustomException()
-        : base()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CustomException"/> class with a message.
+    /// Initializes a new instance of the <see cref="CustomException"/> class with a specified error message.
     /// </summary>
-    /// <param name="message">The message that describes the error.</param>
-    public CustomException(string message)
+    /// <param name="message"> message. </param>
+    public CustomException(string? message)
         : base(message)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CustomException"/> class with a message and inner exception.
+    /// Initializes a new instance of the <see cref="CustomException"/> class with a specified error message and an inner exception.
     /// </summary>
-    /// <param name="message">The message that describes the error.</param>
-    /// <param name="ex">The exception that is the cause of the current exception.</param>
-    public CustomException(string message, Exception ex)
-        : base(message, ex)
+    /// <param name="message"> message. </param>
+    /// <param name="innerException"> Inner exception. </param>
+    public CustomException(string? message, Exception? innerException)
+        : base(message, innerException)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CustomException"/> class with a formatted message.
+    /// Gets the HTTP status code associated with this exception.
     /// </summary>
-    /// <param name="message">The composite format string that describes the error.</param>
-    /// <param name="args">An array of objects to format.</param>
-    public CustomException(string message, params object[] args)
-        : base(string.Format(CultureInfo.CurrentCulture, message, args))
-    {
-    }
+    public HttpStatusCode StatusCode { get; }
 }

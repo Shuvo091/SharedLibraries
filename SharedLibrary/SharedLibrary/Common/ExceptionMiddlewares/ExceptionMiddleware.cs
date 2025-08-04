@@ -1,12 +1,11 @@
-﻿using System.Net;
-using System.Text.Json;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
 
 namespace SharedLibrary.Common.ExceptionMiddlewares;
 
 /// <summary>
-/// Middleware for handling exceptions in the transcription service.
+/// Global middleware for capturing unhandled exceptions and logging them.
 /// </summary>
 public class ExceptionMiddleware
 {
@@ -25,46 +24,36 @@ public class ExceptionMiddleware
     }
 
     /// <summary>
-    /// Invokes the middleware to handle exceptions.
+    /// Invokes the middleware to handle exceptions globally in the application.
     /// </summary>
     /// <param name="context">The HTTP context.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public async Task InvokeAsync(HttpContext context)
     {
-        try
-        {
-            await this.next(context);
-        }
-        catch (Exception ex)
-        {
-            this.logger.LogError($"Something went wrong: {ex}");
-            await HandleExceptionAsync(context, ex);
-        }
-    }
+        var requestId = context.TraceIdentifier;
+        var tenantId = context.Request.Headers.TryGetValue("X-Tenant-ID", out var tid) ? tid.ToString() : "unknown";
+        var userId = context.User?.FindFirst("sub")?.Value ?? context.User?.Identity?.Name ?? "anonymous";
 
-    /// <summary>
-    /// Handles the exception and writes a response.
-    /// </summary>
-    /// <param name="context">The HTTP context.</param>
-    /// <param name="exception">The exception to handle.</param>
-    private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
-    {
-        string customMessage;
-        if (exception.GetType() == typeof(CustomException))
+        using (LogContext.PushProperty("RequestId", requestId))
+        using (LogContext.PushProperty("TenantId", tenantId))
+        using (LogContext.PushProperty("UserId", userId))
+        using (LogContext.PushProperty("RequestPath", context.Request.Path))
+        using (LogContext.PushProperty("HttpMethod", context.Request.Method))
         {
-            customMessage = exception.Message;
+            try
+            {
+                await this.next(context);
+            }
+            catch (CustomException customEx)
+            {
+                this.logger.LogWarning(customEx, "Handled custom exception: {Message}", customEx.Message);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Unhandled exception occurred.");
+                throw;
+            }
         }
-        else
-        {
-            customMessage = "Failed operation";
-        }
-
-        var response = JsonSerializer.Serialize(new
-        {
-            Message = customMessage,
-        });
-        context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-        await context.Response.WriteAsync(response);
     }
 }
