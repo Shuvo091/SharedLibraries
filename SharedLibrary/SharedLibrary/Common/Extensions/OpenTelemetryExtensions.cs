@@ -29,11 +29,14 @@ public static class OpenTelemetryExtensions
         var otelOptions = configuration.GetSection("OpenTelemetry").Get<OpenTelemetryOptions>()
             ?? throw new InvalidOperationException("Open Telemetry not found.");
 
+        var resourceBuilder = ResourceBuilder.CreateDefault()
+            .AddService(serviceName: otelOptions.ServiceName, serviceVersion: otelOptions.ServiceVersion);
+
         services.AddOpenTelemetry()
             .WithMetrics(metrics =>
             {
                 metrics
-                    .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName: otelOptions.ServiceName, serviceVersion: otelOptions.ServiceVersion))
+                    .SetResourceBuilder(resourceBuilder)
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddPrometheusExporter();
@@ -43,7 +46,7 @@ public static class OpenTelemetryExtensions
         // .WithTracing(tracing =>
         // {
         //    tracing
-        //        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName: otelOptions.ServiceName, serviceVersion: otelOptions.ServiceVersion))
+        //        .SetResourceBuilder(resourceBuilder)
         //        .AddAspNetCoreInstrumentation()
         //        .AddHttpClientInstrumentation()
         //        .AddAzureMonitorTraceExporter(options =>
