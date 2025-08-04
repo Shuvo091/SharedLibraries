@@ -39,6 +39,11 @@
         /// Gets or sets the integration configuration.
         /// </summary>
         public AdminIntegrationConfigResponse? IntegrationConfig { get; set; }
+
+        /// <summary>
+        /// Gets or sets the elo configuration.
+        /// </summary>
+        public AdminEloConfigResponse? EloConfig { get; set; }
     }
 
     /// <summary>
