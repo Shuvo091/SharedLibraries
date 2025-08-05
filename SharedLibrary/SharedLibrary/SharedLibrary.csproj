@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	<PackageId>CohesionX.SharedLibrary</PackageId>
-	<Version>8.5.25.1</Version>
+	<Version>8.5.25.5</Version>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>

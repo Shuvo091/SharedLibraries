@@ -25,7 +25,7 @@ namespace SharedLibrary.Cache.ServiceCollectionExtensions
         public static IServiceCollection AddRedis(
             this IServiceCollection services,
             IConfiguration configuration,
-            string sectionName = "Redis")
+            string sectionName = nameof(RedisConfiguration))
         {
             var redisConfig = configuration.GetSection(sectionName).Get<RedisConfiguration>()
                 ?? throw new InvalidOperationException($"Redis configuration section '{sectionName}' not found or invalid.");
@@ -67,7 +67,7 @@ namespace SharedLibrary.Cache.ServiceCollectionExtensions
         public static IServiceCollection AddRedisQueue(
             this IServiceCollection services,
             IConfiguration configuration,
-            string sectionName = "Redis")
+            string sectionName = nameof(RedisConfiguration))
         {
             var redisConfig = configuration.GetSection(sectionName).Get<RedisConfiguration>()
                 ?? throw new InvalidOperationException($"Redis configuration section '{sectionName}' not found or invalid.");
