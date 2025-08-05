@@ -1,17 +1,17 @@
 ﻿namespace SharedLibrary.Contracts.Usermanagement.Responses;
 
 /// <summary>
-/// User log in request.
+/// User login response.
 /// </summary>
-public class UserLoginRequest
+public class UserLoginResponse
 {
     /// <summary>
-    /// Gets or sets username.
+    /// Gets or sets accesstoken.
     /// </summary>
-    public string Username { get; set; } = default!;
+    public string AccessToken { get; set; } = default!;
 
     /// <summary>
-    /// Gets or sets password.
+    /// Gets or sets expires at.
     /// </summary>
-    public string Password { get; set; } = default!;
+    public DateTime ExpiresAt { get; set; }
 }
