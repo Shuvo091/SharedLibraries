@@ -40,7 +40,6 @@ public static class JwtAuthenticationExtensions
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    RoleClaimType = "role",
                     NameClaimType = "email",
                 };
             });
