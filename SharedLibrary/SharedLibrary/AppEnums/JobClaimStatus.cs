@@ -24,4 +24,10 @@ public enum JobClaimStatus
     /// </summary>
     [Display(Name = "failed")]
     Failed,
+
+    /// <summary>
+    /// The job claim assigned.
+    /// </summary>
+    [Display(Name = "assigned")]
+    Assigned,
 }
