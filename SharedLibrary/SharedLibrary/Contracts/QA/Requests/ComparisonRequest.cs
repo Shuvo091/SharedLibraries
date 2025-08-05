@@ -1,6 +1,4 @@
-﻿using SharedLibrary.Contracts.QA.Models;
-
-namespace SharedLibrary.Contracts.QA.Requests;
+﻿namespace SharedLibrary.Contracts.QA.Requests;
 
 /// <summary>
 /// Request model for a comparison operation.
@@ -30,7 +28,7 @@ public class ComparisonRequest
     /// <summary>
     /// Gets or sets list of transcriptions to compare.
     /// </summary>
-    required public List<Transcription> Transcriptions { get; set; }
+    required public List<SharedLibrary.Contracts.QA.Models.Transcription> Transcriptions { get; set; }
 
     /// <summary>
     /// Gets or sets dialect of the audio.
