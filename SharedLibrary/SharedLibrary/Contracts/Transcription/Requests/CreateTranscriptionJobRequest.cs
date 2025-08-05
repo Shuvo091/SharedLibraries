@@ -16,6 +16,11 @@
         public TranscriptionJobAudioMetadataRequest? AudioMetadata { get; set; }
 
         /// <summary>
+        /// Gets or sets the audio context metadata for the job.
+        /// </summary>
+        public TranscriptionJobAudioContextMetadataRequest? AudioMetaContextdata { get; set; }
+
+        /// <summary>
         /// Gets or sets the number of transcribers needed for the job.
         /// </summary>
         public int? TranscribersNeeded { get; set; }
@@ -65,6 +70,17 @@
         /// Gets or sets the estimated difficulty of the job.
         /// </summary>
         public string? EstimatedDifficulty { get; set; }
+    }
+
+    /// <summary>
+    /// Represents audio metadata for a transcription job.
+    /// </summary>
+    public class TranscriptionJobAudioContextMetadataRequest
+    {
+        /// <summary>
+        /// Gets or sets audio context job id.
+        /// </summary>
+        public string? AudioContextJobId { get; set; }
     }
 
     /// <summary>

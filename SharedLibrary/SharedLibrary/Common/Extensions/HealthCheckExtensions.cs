@@ -20,13 +20,13 @@ public static class HealthCheckExtensions
     /// <returns>The updated <see cref="IServiceCollection"/> with health check services added.</returns>
     public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services, IConfiguration configuration)
     {
-        var postgreSqlConnectionString = configuration.GetSection("Databases").Get<DatabasesOptions>()?.PostgreSQLConnectionString;
+        var postgreSqlConnectionString = configuration.GetSection(nameof(DatabasesOptions)).Get<DatabasesOptions>()?.PostgreSQLConnectionString;
         if (string.IsNullOrEmpty(postgreSqlConnectionString))
         {
             throw new InvalidOperationException("PostgreSQL connection string is not configured.");
         }
 
-        var redisConnectionString = configuration.GetSection("Redis").Get<RedisConfiguration>()?.ConnectionString;
+        var redisConnectionString = configuration.GetSection(nameof(RedisConfiguration)).Get<RedisConfiguration>()?.ConnectionString;
         if (string.IsNullOrEmpty(redisConnectionString))
         {
             throw new InvalidOperationException("Redis connection string is not configured.");

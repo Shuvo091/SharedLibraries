@@ -26,7 +26,7 @@ public static class OpenTelemetryExtensions
     /// <returns>The same <see cref="IServiceCollection"/> instance, allowing for method chaining.</returns>
     public static IServiceCollection RegisterOpenTelemetry(this IServiceCollection services, IConfiguration configuration)
     {
-        var otelOptions = configuration.GetSection("OpenTelemetry").Get<OpenTelemetryOptions>()
+        var otelOptions = configuration.GetSection(nameof(OpenTelemetryOptions)).Get<OpenTelemetryOptions>()
             ?? throw new InvalidOperationException("Open Telemetry not found.");
 
         var resourceBuilder = ResourceBuilder.CreateDefault()

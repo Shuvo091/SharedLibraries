@@ -22,7 +22,7 @@ public static class JwtAuthenticationExtensions
     /// <returns> Service collection. </returns>
     public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtSection = configuration.GetSection("Jwt");
+        var jwtSection = configuration.GetSection(nameof(JwtOptions));
 
         var options = jwtSection.Get<JwtOptions>()
             ?? throw new InvalidOperationException("JWT configuration section is missing or invalid.");
@@ -40,7 +40,6 @@ public static class JwtAuthenticationExtensions
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    RoleClaimType = "role",
                     NameClaimType = "email",
                 };
             });
