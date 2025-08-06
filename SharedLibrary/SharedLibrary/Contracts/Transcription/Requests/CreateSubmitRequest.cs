@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets or sets the user identifier.
         /// </summary>
-        public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
 
         /// <summary>
         /// Gets or sets the final transcribed text.
