@@ -11,6 +11,11 @@ public class ChunkInfo
     public string ChunkUri { get; set; } = default!;
 
     /// <summary>
+    /// Gets or sets the chunk Id.
+    /// </summary>
+    public string? ChunkId { get; set; }
+
+    /// <summary>
     /// Gets or sets start MS.
     /// </summary>
     public int StartMs { get; set; }
