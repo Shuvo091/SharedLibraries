@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents the response containing details of a transcription job.
     /// </summary>
-    public class GetTranscriptionJobResponse
+    public class GetJobResponse
     {
         /// <summary>
         /// Gets or sets the job identifier.

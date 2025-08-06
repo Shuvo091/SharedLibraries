@@ -6,6 +6,11 @@
     public class CreateDraftsRequest
     {
         /// <summary>
+        /// Gets or sets the user identifier.
+        /// </summary>
+        public Guid? UserId { get; set; }
+
+        /// <summary>
         /// Gets or sets the draft text.
         /// </summary>
         public string? Text { get; set; }

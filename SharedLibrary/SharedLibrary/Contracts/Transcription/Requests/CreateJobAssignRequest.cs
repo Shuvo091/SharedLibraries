@@ -16,6 +16,11 @@
         public Guid UserId { get; set; }
 
         /// <summary>
+        /// Gets or sets the user role.
+        /// </summary>
+        public string? Role { get; set; }
+
+        /// <summary>
         /// Gets or sets the claim identifier.
         /// </summary>
         public Guid ClaimId { get; set; }
