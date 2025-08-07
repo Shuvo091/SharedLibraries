@@ -1,4 +1,6 @@
-﻿using SharedLibrary.Contracts.QA.Enums;
+﻿using System.Text.Json.Serialization;
+using SharedLibrary.Contracts.QA.Enums;
+using SharedLibrary.Contracts.QA.JsonConverters;
 
 namespace SharedLibrary.Contracts.QA.Models;
 
@@ -20,6 +22,7 @@ public class EloRecommendation
     /// <summary>
     /// Gets or sets role of the transcriber in the comparison.
     /// </summary>
+    [JsonConverter(typeof(ParticipantRoleConverter))]
     public ParticipantRole Role { get; set; }
 
     /// <summary>
@@ -40,5 +43,6 @@ public class EloRecommendation
     /// <summary>
     /// Gets or sets outcome of the comparison for the transcriber.
     /// </summary>
+    [JsonConverter(typeof(ComparisonOutcomeConverter))]
     public ComparisonOutcome OutCome { get; set; }
 }

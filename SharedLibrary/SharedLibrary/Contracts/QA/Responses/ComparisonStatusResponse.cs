@@ -1,4 +1,6 @@
-﻿using SharedLibrary.Contracts.QA.Enums;
+﻿using System.Text.Json.Serialization;
+using SharedLibrary.Contracts.QA.Enums;
+using SharedLibrary.Contracts.QA.JsonConverters;
 using SharedLibrary.Contracts.QA.Models;
 
 namespace SharedLibrary.Contracts.QA.Responses;
@@ -16,11 +18,13 @@ public class ComparisonStatusResponse
     /// <summary>
     /// Gets or sets status of the comparison.
     /// </summary>
+    [JsonConverter(typeof(ComparisonStatusConverter))]
     public ComparisonStatus Status { get; set; }
 
     /// <summary>
     /// Gets or sets the current stage of the comparison process.
     /// </summary>
+    [JsonConverter(typeof(ComparisonStageConverter))]
     required public ComparisonStage CurrentStage { get; set; }
 
     /// <summary>

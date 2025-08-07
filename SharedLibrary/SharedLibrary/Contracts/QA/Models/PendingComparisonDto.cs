@@ -1,4 +1,6 @@
-﻿using SharedLibrary.Contracts.QA.Enums;
+﻿using System.Text.Json.Serialization;
+using SharedLibrary.Contracts.QA.Enums;
+using SharedLibrary.Contracts.QA.JsonConverters;
 
 namespace SharedLibrary.Contracts.QA.Models;
 
@@ -16,11 +18,13 @@ public class PendingComparisonDto
     /// <summary>
     /// Gets or sets the status of the comparison.
     /// </summary>
+    [JsonConverter(typeof(ComparisonStatusConverter))]
     required public ComparisonStatus ComparisonStatus { get; set; } = ComparisonStatus.Pending;
 
     /// <summary>
     /// Gets or sets the current stage of the comparison process.
     /// </summary>
+    [JsonConverter(typeof(ComparisonStageConverter))]
     required public ComparisonStage CurrentStage { get; set; } = ComparisonStage.Initial;
 
     /// <summary>

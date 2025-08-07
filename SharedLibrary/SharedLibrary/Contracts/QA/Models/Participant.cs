@@ -1,4 +1,6 @@
-﻿using SharedLibrary.Contracts.QA.Enums;
+﻿using System.Text.Json.Serialization;
+using SharedLibrary.Contracts.QA.Enums;
+using SharedLibrary.Contracts.QA.JsonConverters;
 
 namespace SharedLibrary.Contracts.QA.Models;
 
@@ -21,5 +23,6 @@ public class Participant
     /// <summary>
     /// Gets or sets the outcome of the comparison for the participant.
     /// </summary>
+    [JsonConverter(typeof(ComparisonOutcomeConverter))]
     public ComparisonOutcome Outcome { get; set; }
 }

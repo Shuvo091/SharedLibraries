@@ -8,6 +8,12 @@ namespace SharedLibrary.Contracts.QA.Enums;
 public enum ComparisonOutcome
 {
     /// <summary>
+    /// Indicates that the outcome is undecided or not yet determined.
+    /// </summary>
+    [Display(Name = "undecided")]
+    Undecided = -1,
+
+    /// <summary>
     /// Indicates a loss outcome.
     /// </summary>
     [Display(Name = "loss")]

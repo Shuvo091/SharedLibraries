@@ -81,6 +81,7 @@ public static class JwtAuthenticationExtensions
         services.AddControllers(options =>
         {
             options.Filters.Add(new AuthorizeFilter());
+            options.SuppressAsyncSuffixInActionNames = false;
         });
 
         return services;
