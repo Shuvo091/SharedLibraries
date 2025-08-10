@@ -36,6 +36,11 @@ public class ClaimJobResponse
     public int MaxConcurrentJobs { get; set; }
 
     /// <summary>
+    /// Gets or sets current elo for the user.
+    /// </summary>
+    public int CurrentElo { get; set; }
+
+    /// <summary>
     /// Gets or sets time until which the user's capacity is reserved.
     /// </summary>
     public DateTime CapacityReservedUntil { get; set; }
