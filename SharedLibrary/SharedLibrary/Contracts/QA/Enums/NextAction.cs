@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using SharedLibrary.Common.Utilities;
 
 namespace SharedLibrary.Contracts.QA.Enums
 {
     /// <summary>
     /// Next action to be taken after a comparison.
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<NextAction>))]
     public enum NextAction
     {
         /// <summary>

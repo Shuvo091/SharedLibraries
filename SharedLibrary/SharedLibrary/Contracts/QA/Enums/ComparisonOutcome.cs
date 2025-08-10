@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using SharedLibrary.Common.Utilities;
 
 namespace SharedLibrary.Contracts.QA.Enums;
 
 /// <summary>
 /// Represents the outcome of a comparison for a participant.
 /// </summary>
+[JsonConverter(typeof(EnumConverter<ComparisonOutcome>))]
 public enum ComparisonOutcome
 {
     /// <summary>

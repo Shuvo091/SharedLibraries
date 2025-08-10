@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using SharedLibrary.Common.Utilities;
 
 namespace SharedLibrary.Contracts.QA.Enums;
 
 /// <summary>
 /// Represents the status of a comparison.
 /// </summary>
+[JsonConverter(typeof(EnumConverter<ComparisonStatus>))]
 public enum ComparisonStatus
 {
     /// <summary>

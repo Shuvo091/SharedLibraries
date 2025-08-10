@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.Contracts.QA.Requests;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SharedLibrary.Contracts.QA.Requests;
 
 /// <summary>
 /// Represents the request for admin configuration.
@@ -112,6 +114,7 @@ public class OpenaiIntegrationConfig
     public double? MaxTokensPerRequest { get; set; }
 
     /// <summary>Gets or sets the temperature setting.</summary>
+    [Range(0, 2, ErrorMessage = "TemperatureSetting must be between 0 and 2.")]
     public double? TemperatureSetting { get; set; }
 
     /// <summary>Gets or sets the daily budget limit.</summary>

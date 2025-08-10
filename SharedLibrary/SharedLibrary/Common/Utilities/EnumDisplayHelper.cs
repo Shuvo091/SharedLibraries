@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace SharedLibrary.AppEnums;
+namespace SharedLibrary.Common.Utilities;
 
 /// <summary>
 /// Provides helper methods for working with enum display names using <see cref="DisplayAttribute"/>.

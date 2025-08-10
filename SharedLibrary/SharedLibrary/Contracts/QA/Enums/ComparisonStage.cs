@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using SharedLibrary.Common.Utilities;
 
 namespace SharedLibrary.Contracts.QA.Enums
 {
@@ -6,6 +8,7 @@ namespace SharedLibrary.Contracts.QA.Enums
     /// Defines the various stages of a comparison process, representing the lifecycle of an item or operation as it
     /// progresses through the system.
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<ComparisonStage>))]
     public enum ComparisonStage
     {
         /// <summary>

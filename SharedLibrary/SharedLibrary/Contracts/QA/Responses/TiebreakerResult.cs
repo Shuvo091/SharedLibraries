@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using SharedLibrary.Contracts.QA.Enums;
-using SharedLibrary.Contracts.QA.JsonConverters;
+﻿using SharedLibrary.Contracts.QA.Enums;
 using SharedLibrary.Contracts.QA.Models;
 
 namespace SharedLibrary.Contracts.QA.Responses
@@ -38,7 +36,6 @@ namespace SharedLibrary.Contracts.QA.Responses
         /// <summary>
         /// Gets or sets next action to be taken after tiebreaker.
         /// </summary>
-        [JsonConverter(typeof(NextActionConverter))]
         required public NextAction NextAction { get; set; }
     }
 }

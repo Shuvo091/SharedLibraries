@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace SharedLibrary.Redis.Services.Interfaces
 {
     /// <summary>
