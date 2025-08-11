@@ -1,4 +1,5 @@
-﻿using SharedLibrary.Contracts.QA.Models;
+﻿using System.Text.Json.Serialization;
+using SharedLibrary.Contracts.QA.Models;
 
 namespace SharedLibrary.Contracts.QA.Responses;
 
@@ -10,6 +11,7 @@ public class OpenAiResult
     /// <summary>
     /// Gets or sets winner transcription identifier.
     /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Winner { get; set; }
 
     /// <summary>
@@ -25,7 +27,8 @@ public class OpenAiResult
     /// <summary>
     /// Gets or sets linguistic analysis details.
     /// </summary>
-    required public LinguisticAnalysis LinguisticAnalysis { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public LinguisticAnalysis? LinguisticAnalysis { get; set; }
 
     /// <summary>
     /// Gets or sets reasoning for the assessment.
