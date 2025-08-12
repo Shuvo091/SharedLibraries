@@ -26,11 +26,6 @@ public class EloEntryDto
     public string Change => this.NewElo >= this.OldElo ? $"+{this.NewElo - this.OldElo}" : $"-{this.OldElo - this.NewElo}";
 
     /// <summary>
-    /// Gets or sets unique identifier for the opponent.
-    /// </summary>
-    public Guid Opponent { get; set; }
-
-    /// <summary>
     /// Gets or sets outcome of the match (e.g., win, loss).
     /// </summary>
     public string Outcome { get; set; } = string.Empty; // "win", "loss", etc.
