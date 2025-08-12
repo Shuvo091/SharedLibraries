@@ -6,11 +6,6 @@
     public class CreateSubmitRequest
     {
         /// <summary>
-        /// Gets or sets the user identifier.
-        /// </summary>
-        public Guid? UserId { get; set; }
-
-        /// <summary>
         /// Gets or sets the final transcribed text.
         /// </summary>
         public string? FinalText { get; set; }
