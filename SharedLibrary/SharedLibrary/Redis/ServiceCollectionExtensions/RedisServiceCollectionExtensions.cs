@@ -18,7 +18,7 @@ namespace SharedLibrary.Cache.ServiceCollectionExtensions
         /// <summary>
         /// Adds Redis necessaries to the service collection.
         /// </summary>
-        /// <param name="services">The <see cref="IServiceCollection"/> to which the Redis queue service will be added.</param>
+        /// <param name="services">The <see cref="IServiceCollection"/> to which the Redis service will be added.</param>
         /// <param name="configuration">The application configuration containing the Redis settings.</param>
         /// <param name="sectionName">The name of the configuration section that contains the Redis settings.  Defaults to "Redis".</param>
         /// <returns>The service collection for chaining.</returns>
@@ -79,6 +79,31 @@ namespace SharedLibrary.Cache.ServiceCollectionExtensions
             });
 
             services.AddSingleton<IQueueService, QueueService>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds a Redis counter service to the specified <see cref="IServiceCollection"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/> to which the Redis counter service will be added.</param>
+        /// <param name="configuration">The application configuration containing the Redis settings.</param>
+        /// <param name="sectionName">The name of the configuration section that contains the Redis settings.  Defaults to "Redis".</param>
+        /// <returns>The updated <see cref="IServiceCollection"/> with the Redis counter service registered.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if the specified configuration section is not found or is invalid.</exception>
+        public static IServiceCollection AddRedisCounter(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            string sectionName = nameof(RedisConfiguration))
+        {
+            var redisConfig = configuration.GetSection(sectionName).Get<RedisConfiguration>()
+                ?? throw new InvalidOperationException($"Redis configuration section '{sectionName}' not found or invalid.");
+
+            services.AddSingleton<ICounterService>(provider =>
+            {
+                var connection = provider.GetRequiredService<IConnectionMultiplexer>();
+                return new CounterService(connection, redisConfig.DatabaseId);
+            });
 
             return services;
         }
