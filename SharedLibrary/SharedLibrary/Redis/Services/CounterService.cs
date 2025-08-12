@@ -55,4 +55,51 @@ public class CounterService : ICounterService
             throw new InvalidOperationException($"Failed to decrement counter for key '{key}'", ex);
         }
     }
+
+    /// <inheritdoc/>
+    public async Task<long?> GetAsync(string key)
+    {
+        if (string.IsNullOrEmpty(key))
+        {
+            throw new ArgumentException("Key cannot be null or empty", nameof(key));
+        }
+
+        try
+        {
+            var value = await this.database.StringGetAsync(key);
+            if (value.IsNull)
+            {
+                return null;
+            }
+
+            if (long.TryParse(value, out var result))
+            {
+                return result;
+            }
+
+            throw new InvalidOperationException($"Value for key '{key}' is not a valid long.");
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException($"Failed to get counter for key '{key}'", ex);
+        }
+    }
+
+    /// <inheritdoc/>
+    public async Task SetAsync(string key, long value)
+    {
+        if (string.IsNullOrEmpty(key))
+        {
+            throw new ArgumentException("Key cannot be null or empty", nameof(key));
+        }
+
+        try
+        {
+            await this.database.StringSetAsync(key, value);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException($"Failed to set counter for key '{key}'", ex);
+        }
+    }
 }

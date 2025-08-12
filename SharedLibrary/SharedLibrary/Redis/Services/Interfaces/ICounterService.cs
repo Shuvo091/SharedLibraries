@@ -20,4 +20,19 @@ public interface ICounterService
     /// <param name="amount">The amount to decrement by (default 1).</param>
     /// <returns>The new value of the counter.</returns>
     Task<long> DecrementAsync(string key, long amount = 1);
+
+    /// <summary>
+    /// Gets the current value of the counter for the specified key.
+    /// </summary>
+    /// <param name="key">The key of the counter.</param>
+    /// <returns>The current value of the counter, or null if not set.</returns>
+    Task<long?> GetAsync(string key);
+
+    /// <summary>
+    /// Sets the counter value for the specified key.
+    /// </summary>
+    /// <param name="key">The key of the counter.</param>
+    /// <param name="value">The value to set.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    Task SetAsync(string key, long value);
 }
