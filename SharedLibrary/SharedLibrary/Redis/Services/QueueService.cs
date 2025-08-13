@@ -56,7 +56,7 @@ public class QueueService : IQueueService
     }
 
     /// <inheritdoc/>
-    public async Task<List<T>?> DequeueRangeAsync<T>(string queueName, long fetchCount = 1)
+    public async Task<List<T>> DequeueRangeAsync<T>(string queueName, long fetchCount = 1)
     {
         ArgumentNullException.ThrowIfNull(queueName);
         var values = await this.queue.ListLeftRangePopAsync(queueName, fetchCount);

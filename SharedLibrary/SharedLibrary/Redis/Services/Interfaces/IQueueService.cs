@@ -29,7 +29,7 @@ public interface IQueueService
     /// <param name="queueName">The name of the queue.</param>
     /// <param name="fetchCount">The count of items to be fetched.</param>
     /// <returns>The dequeued items list, or if the queue is empty.</returns>
-    Task<List<T>?> DequeueRangeAsync<T>(string queueName, long fetchCount = 1);
+    Task<List<T>> DequeueRangeAsync<T>(string queueName, long fetchCount = 1);
 
     /// <summary>
     /// Gets the length of the specified queue.
