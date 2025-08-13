@@ -24,10 +24,7 @@ public class QueueService : IQueueService
     {
         try
         {
-            if (queueName is null)
-            {
-                throw new ArgumentNullException(nameof(queueName));
-            }
+            ArgumentNullException.ThrowIfNull(queueName);
 
             if (item is null)
             {
@@ -48,13 +45,9 @@ public class QueueService : IQueueService
     {
         try
         {
-            if (queueName is null)
-            {
-                throw new ArgumentNullException(nameof(queueName));
-            }
-
+            ArgumentNullException.ThrowIfNull(queueName);
             var value = await this.queue.ListLeftPopAsync(queueName);
-            return value != null ? JsonSerializer.Deserialize<T>(value) : default;
+            return value.HasValue ? JsonSerializer.Deserialize<T>(value!) : default;
         }
         catch (Exception ex)
         {
@@ -63,13 +56,23 @@ public class QueueService : IQueueService
     }
 
     /// <inheritdoc/>
-    public async Task<T?> PeekAsync<T>(string queueName)
+    public async Task<List<T>?> DequeueRangeAsync<T>(string queueName, long fetchCount = 1)
     {
-        if (queueName is null)
+        ArgumentNullException.ThrowIfNull(queueName);
+        var values = await this.queue.ListLeftRangePopAsync(queueName, fetchCount);
+        if (values is null)
         {
-            throw new ArgumentNullException(nameof(queueName));
+            return [];
         }
 
+        return [.. values
+            .Select(value => JsonSerializer.Deserialize<T>(value.ToString()))];
+    }
+
+    /// <inheritdoc/>
+    public async Task<T?> PeekAsync<T>(string queueName)
+    {
+        ArgumentNullException.ThrowIfNull(queueName);
         var value = await this.queue.ListGetByIndexAsync(queueName, 0);
         return value != null ? JsonSerializer.Deserialize<T>(value) : default;
     }
@@ -79,11 +82,7 @@ public class QueueService : IQueueService
     {
         try
         {
-            if (queueName is null)
-            {
-                throw new ArgumentNullException(nameof(queueName));
-            }
-
+            ArgumentNullException.ThrowIfNull(queueName);
             return await this.queue.ListLengthAsync(queueName);
         }
         catch (Exception ex)
@@ -97,11 +96,7 @@ public class QueueService : IQueueService
     {
         try
         {
-            if (queueName is null)
-            {
-                throw new ArgumentNullException(nameof(queueName));
-            }
-
+            ArgumentNullException.ThrowIfNull(queueName);
             await this.queue.KeyDeleteAsync(queueName);
         }
         catch (Exception ex)

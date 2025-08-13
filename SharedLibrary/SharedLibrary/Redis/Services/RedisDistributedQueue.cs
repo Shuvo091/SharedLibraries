@@ -22,10 +22,10 @@ namespace SharedLibrary.Redis.Services
         }
 
         /// <inheritdoc/>
-        public Task<string?> ListGetByIndexAsync(string key, long index)
+        public async Task<string?> ListGetByIndexAsync(string key, long index)
         {
-            return this.database.ListGetByIndexAsync(key, index).ContinueWith(t =>
-                t.Result.HasValue ? t.Result.ToString() : null);
+            var result = await this.database.ListGetByIndexAsync(key, index);
+            return result.HasValue ? result.ToString() : null;
         }
 
         /// <inheritdoc/>
@@ -33,10 +33,10 @@ namespace SharedLibrary.Redis.Services
             => this.database.ListLengthAsync(key);
 
         /// <inheritdoc/>
-        public Task<string?> ListLeftPopAsync(string key)
+        public async Task<RedisValue?> ListLeftPopAsync(string key)
         {
-            return this.database.ListLeftPopAsync(key).ContinueWith(t =>
-                t.Result.HasValue ? t.Result.ToString() : null);
+            var result = await this.database.ListLeftPopAsync(key);
+            return result.HasValue ? result : (RedisValue?)null;
         }
 
         /// <inheritdoc/>
@@ -46,5 +46,17 @@ namespace SharedLibrary.Redis.Services
         /// <inheritdoc/>
         public Task<bool> KeyDeleteAsync(string key)
             => this.database.KeyDeleteAsync(key);
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<RedisValue>?> ListLeftRangePopAsync(string key, long fetchCount = 1)
+        {
+            var values = await this.database.ListLeftPopAsync(key, fetchCount);
+            if (values == null || values.Length == 0)
+            {
+                return null;
+            }
+
+            return [.. values];
+        }
     }
 }

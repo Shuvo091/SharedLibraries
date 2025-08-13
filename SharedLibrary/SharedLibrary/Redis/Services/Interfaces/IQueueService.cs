@@ -23,6 +23,15 @@ public interface IQueueService
     Task<T?> DequeueAsync<T>(string queueName);
 
     /// <summary>
+    /// Dequeues a range of items from the specified queue.
+    /// </summary>
+    /// <typeparam name="T">The type of the item to dequeue.</typeparam>
+    /// <param name="queueName">The name of the queue.</param>
+    /// <param name="fetchCount">The count of items to be fetched.</param>
+    /// <returns>The dequeued items list, or if the queue is empty.</returns>
+    Task<List<T>?> DequeueRangeAsync<T>(string queueName, long fetchCount = 1);
+
+    /// <summary>
     /// Gets the length of the specified queue.
     /// </summary>
     /// <param name="queueName">The name of the queue.</param>

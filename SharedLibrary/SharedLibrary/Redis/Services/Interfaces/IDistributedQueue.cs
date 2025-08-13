@@ -1,3 +1,5 @@
+using StackExchange.Redis;
+
 namespace SharedLibrary.Redis.Services.Interfaces
 {
     /// <summary>
@@ -19,7 +21,7 @@ namespace SharedLibrary.Redis.Services.Interfaces
         /// </summary>
         /// <param name="key">The key of the queue.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation. The task result contains the value that was removed, or <c>null</c> if the queue is empty.</returns>
-        Task<string?> ListLeftPopAsync(string key);
+        Task<RedisValue?> ListLeftPopAsync(string key);
 
         /// <summary>
         /// Gets an element at the specified index without removing it.
@@ -42,5 +44,13 @@ namespace SharedLibrary.Redis.Services.Interfaces
         /// <param name="key">The key of the queue to delete.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation. The task result contains <c>true</c> if the key was removed; otherwise, <c>false</c>.</returns>
         Task<bool> KeyDeleteAsync(string key);
+
+        /// <summary>
+        /// Removes and returns up to <paramref name="fetchCount"/> leftmost elements of the queue.
+        /// </summary>
+        /// <param name="key">The key of the queue.</param>
+        /// <param name="fetchCount">The number of elements to pop from the left. Defaults to 1.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation. The task result contains a list of values that were removed, or <c>null</c> if the queue is empty.</returns>
+        Task<IEnumerable<RedisValue>?> ListLeftRangePopAsync(string key, long fetchCount = 1);
     }
 }
