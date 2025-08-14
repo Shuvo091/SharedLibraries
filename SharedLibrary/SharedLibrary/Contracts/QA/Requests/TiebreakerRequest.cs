@@ -8,7 +8,7 @@ public class TiebreakerRequest
     /// <summary>
     /// Gets or sets workflow request identifier.
     /// </summary>
-    required public string WorkflowRequestId { get; set; }
+    required public Guid WorkflowRequestId { get; set; }
 
     /// <summary>
     /// Gets or sets tiebreaker transcription.
