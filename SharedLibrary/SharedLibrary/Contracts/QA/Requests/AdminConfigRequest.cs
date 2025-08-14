@@ -114,13 +114,13 @@ public class OpenaiIntegrationConfig
     /// Gets or sets the OpenAi model cost
     /// per million tokens for the chat completion model.
     /// </summary>
-    required public InputTokenCost InputTokenCost { get; set; }
+    public InputTokenCost? InputTokenCost { get; set; }
 
     /// <summary>
     /// Gets or sets the OpenAi model cost
     /// per million tokens for the chat completion model batch apis.
     /// </summary>
-    required public OutputTokenCost OutputTokenCost { get; set; }
+    public OutputTokenCost? OutputTokenCost { get; set; }
 
     /// <summary>Gets or sets the maximum tokens per request.</summary>
     public double? MaxTokensPerRequest { get; set; }
@@ -180,12 +180,12 @@ public class InputTokenCost
     /// <summary>
     /// Gets or sets the cost per token for batch processing.
     /// </summary>
-    public double Batch { get; set; }
+    public double? Batch { get; set; }
 
     /// <summary>
     /// Gets or sets the cost per token for standard processing.
     /// </summary>
-    public double Standard { get; set; }
+    public double? Standard { get; set; }
 }
 
 /// <summary>
@@ -196,10 +196,10 @@ public class OutputTokenCost
     /// <summary>
     /// Gets or sets the cost per batch output token.
     /// </summary>
-    public double Batch { get; set; }
+    public double? Batch { get; set; }
 
     /// <summary>
     /// Gets or sets the cost per standard output token.
     /// </summary>
-    public double Standard { get; set; }
+    public double? Standard { get; set; }
 }
