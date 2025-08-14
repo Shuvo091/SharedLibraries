@@ -107,5 +107,30 @@ namespace SharedLibrary.Cache.ServiceCollectionExtensions
 
             return services;
         }
+
+        /// <summary>
+        /// Adds a Redis-based priority queue service to the specified <see cref="IServiceCollection"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/> to which the Redis priority queue service will be added.</param>
+        /// <param name="configuration">The application configuration containing the Redis settings.</param>
+        /// <param name="sectionName">The name of the configuration section that contains the Redis settings.  Defaults to "Redis".</param>
+        /// <returns>The updated <see cref="IServiceCollection"/> with the Redis priority queue service registered.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if the specified configuration section is not found or is invalid.</exception>
+        public static IServiceCollection AddRedisPriorityQueue(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            string sectionName = nameof(RedisConfiguration))
+        {
+            var redisConfig = configuration.GetSection(sectionName).Get<RedisConfiguration>()
+                ?? throw new InvalidOperationException($"Redis configuration section '{sectionName}' not found or invalid.");
+
+            services.AddSingleton<IPriorityQueueService>(provider =>
+            {
+                var connection = provider.GetRequiredService<IConnectionMultiplexer>();
+                return new PriorityQueueService(connection, redisConfig.DatabaseId);
+            });
+
+            return services;
+        }
     }
 }
