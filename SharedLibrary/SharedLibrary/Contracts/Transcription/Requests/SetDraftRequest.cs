@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.Contracts.Transcription.Requests
+﻿using Azure.Core;
+
+namespace SharedLibrary.Contracts.Transcription.Requests
 {
     /// <summary>
     /// Represents a request to set or update a draft in the system.
@@ -14,6 +16,11 @@
         /// Gets or sets the timestamp of when the draft was created or last updated.
         /// </summary>
         public DateTime? Timestamp { get; set; }
+
+        /// <summary>
+        /// Gets or sets the unique identifier of the job associated with the draft.
+        /// </summary>
+        public int? CursorPosition { get; set; }
 
         /// <summary>
         /// Gets or sets the version number of the entity.
