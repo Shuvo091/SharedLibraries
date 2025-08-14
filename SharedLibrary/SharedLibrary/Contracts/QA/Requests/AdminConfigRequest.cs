@@ -110,6 +110,18 @@ public class OpenaiIntegrationConfig
     /// <summary>Gets or sets the OpenAI model.</summary>
     public string? Model { get; set; }
 
+    /// <summary>
+    /// Gets or sets the OpenAi model cost
+    /// per million tokens for the chat completion model.
+    /// </summary>
+    required public InputTokenCost InputTokenCost { get; set; }
+
+    /// <summary>
+    /// Gets or sets the OpenAi model cost
+    /// per million tokens for the chat completion model batch apis.
+    /// </summary>
+    required public OutputTokenCost OutputTokenCost { get; set; }
+
     /// <summary>Gets or sets the maximum tokens per request.</summary>
     public double? MaxTokensPerRequest { get; set; }
 
@@ -158,4 +170,36 @@ public class ProfessionalQaConfig
 
     /// <summary>Gets or sets a value indicating whether to bypass head-to-head comparison.</summary>
     public bool? BypassHeadToHeadComparison { get; set; }
+}
+
+/// <summary>
+/// Represents the cost configuration for input tokens.
+/// </summary>
+public class InputTokenCost
+{
+    /// <summary>
+    /// Gets or sets the cost per token for batch processing.
+    /// </summary>
+    public double Batch { get; set; }
+
+    /// <summary>
+    /// Gets or sets the cost per token for standard processing.
+    /// </summary>
+    public double Standard { get; set; }
+}
+
+/// <summary>
+/// Represents the cost configuration for output tokens.
+/// </summary>
+public class OutputTokenCost
+{
+    /// <summary>
+    /// Gets or sets the cost per batch output token.
+    /// </summary>
+    public double Batch { get; set; }
+
+    /// <summary>
+    /// Gets or sets the cost per standard output token.
+    /// </summary>
+    public double Standard { get; set; }
 }
