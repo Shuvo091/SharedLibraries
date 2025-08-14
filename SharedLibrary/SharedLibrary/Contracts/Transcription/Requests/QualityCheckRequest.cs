@@ -19,5 +19,5 @@ public class QualityCheckRequest
     /// <summary>
     /// Gets or sets the dialect configuration settings for the quality check.
     /// </summary>
-    public DialectConfig DialectConfig { get; set; } = new ();
+    public DialectConfig? DialectConfig { get; set; }
 }

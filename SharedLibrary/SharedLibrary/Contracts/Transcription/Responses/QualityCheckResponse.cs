@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.Contracts.Transcription.Responses;
+﻿using System.Text.Json;
+
+namespace SharedLibrary.Contracts.Transcription.Responses;
 
 /// <summary>
 /// Represents the response of a quality check operation.
@@ -18,7 +20,7 @@ public class QualityCheckResponse
     /// <summary>
     /// Gets or sets the detailed results of each quality check type.
     /// </summary>
-    public QualityCheckResults CheckResults { get; set; } = new ();
+    public JsonElement? CheckResults { get; set; }
 
     /// <summary>
     /// Gets or sets the list of general suggestions from the quality check.
