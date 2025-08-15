@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	<PackageId>CohesionX.SharedLibrary</PackageId>
-	<Version>8.15.25.5</Version>
+	<Version>8.15.25.9</Version>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -20,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+	<PackageReference Include="CloudNative.CloudEvents" Version="2.8.0" />
+	<PackageReference Include="CloudNative.CloudEvents.SystemTextJson" Version="2.8.0" />
+	<PackageReference Include="Confluent.Kafka" Version="2.11.0" />
 	<PackageReference Include="Roslynator.Analyzers" Version="4.14.0">
 		<PrivateAssets>all</PrivateAssets>
 		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
