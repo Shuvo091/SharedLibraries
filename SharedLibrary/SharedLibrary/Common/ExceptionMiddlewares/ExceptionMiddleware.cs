@@ -1,11 +1,9 @@
-﻿using CloudNative.CloudEvents.Core;
+﻿using System.Net.Mime;
+using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
-using System.Net.Mime;
-using System.Text.Json;
 
 namespace SharedLibrary.Common.ExceptionMiddlewares;
 
