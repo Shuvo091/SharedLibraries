@@ -1,6 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CloudNative.CloudEvents.Core;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
+using System.Net.Mime;
+using System.Text.Json;
 
 namespace SharedLibrary.Common.ExceptionMiddlewares;
 
@@ -10,16 +15,22 @@ namespace SharedLibrary.Common.ExceptionMiddlewares;
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate next;
+    private readonly IHostEnvironment hostingEnvironment;
     private readonly ILogger<ExceptionMiddleware> logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExceptionMiddleware"/> class.
     /// </summary>
     /// <param name="next">The next middleware in the pipeline.</param>
+    /// <param name="hostingEnvironment">Hosting Environment.</param>
     /// <param name="logger">The logger instance.</param>
-    public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+    public ExceptionMiddleware(
+        RequestDelegate next,
+        IHostEnvironment hostingEnvironment,
+        ILogger<ExceptionMiddleware> logger)
     {
         this.next = next;
+        this.hostingEnvironment = hostingEnvironment;
         this.logger = logger;
     }
 
@@ -44,16 +55,22 @@ public class ExceptionMiddleware
             {
                 await this.next(context);
             }
-            catch (CustomException customEx)
-            {
-                this.logger.LogWarning(customEx, "Handled custom exception: {Message}", customEx.Message);
-                throw;
-            }
             catch (Exception ex)
             {
                 this.logger.LogError(ex, "Unhandled exception occurred.");
-                throw;
+
+                var errorResponse = new CustomErrorResponse
+                {
+                    Message = ex.Message,
+                    DevMessage = this.IsDevelopment() ? ex.ToString() : null,
+                };
+
+                context.Response.ContentType = MediaTypeNames.Application.Json;
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
             }
         }
     }
+
+    private bool IsDevelopment() => this.hostingEnvironment.IsDevelopment();
 }
