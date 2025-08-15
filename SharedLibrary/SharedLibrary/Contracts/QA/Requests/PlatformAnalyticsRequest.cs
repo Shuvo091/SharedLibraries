@@ -10,10 +10,10 @@ public class PlatformAnalyticsRequest
     /// <summary>
     /// Gets or sets the timeframe for analytics.
     /// </summary>
-    public TimeFrame? TimeFrame { get; set; }
+    public string? TimeFrame { get; set; }
 
     /// <summary>
     /// Gets or sets the dialect for analytics.
     /// </summary>
-    public Dialect? Dialect { get; set; }
+    public string? Dialect { get; set; }
 }
