@@ -20,12 +20,12 @@ public class BatchComparisonRequest
     /// <summary>
     /// Gets or sets the time range for the batch comparison.
     /// </summary>
-    public TimeRangeDto? TimeRange { get; set; }
+    required public TimeRangeDto TimeRange { get; set; }
 
     /// <summary>
     /// Gets or sets the filters to apply during the batch comparison.
     /// </summary>
-    public FiltersDto? Filters { get; set; }
+    required public FiltersDto Filters { get; set; }
 
     /// <summary>
     /// Gets or sets the list of audit criteria for the batch comparison.
