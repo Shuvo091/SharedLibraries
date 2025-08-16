@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.Contracts.Usermanagement.Responses;
+﻿namespace SharedLibrary.Contracts.Usermanagement.Models;
 
 /// <summary>
 /// User preferences data transfer object.

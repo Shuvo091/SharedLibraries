@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.Contracts.Usermanagement.Responses;
+﻿using SharedLibrary.Contracts.Usermanagement.Models;
+
+namespace SharedLibrary.Contracts.Usermanagement.Responses;
 
 /// <summary>
 /// Response containing user profile information.

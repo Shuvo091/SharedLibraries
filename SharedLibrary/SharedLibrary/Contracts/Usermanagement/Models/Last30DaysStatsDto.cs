@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.Contracts.Usermanagement.Responses;
+﻿namespace SharedLibrary.Contracts.Usermanagement.Models;
 
 /// <summary>
 /// Statistics for the last 30 days.

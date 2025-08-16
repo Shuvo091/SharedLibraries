@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.Contracts.Usermanagement.Requests;
+﻿using SharedLibrary.Contracts.Usermanagement.Models;
+
+namespace SharedLibrary.Contracts.Usermanagement.Requests;
 
 /// <summary>
 /// Request to notify about an Elo update event.

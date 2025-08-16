@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.Contracts.Usermanagement.Requests;
+﻿namespace SharedLibrary.Contracts.Usermanagement.Models;
 
 /// <summary>
 /// Result of an Elo update for a user.

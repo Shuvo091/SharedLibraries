@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.Contracts.Usermanagement.Responses;
+﻿namespace SharedLibrary.Contracts.Usermanagement.Models;
 
 /// <summary>
 /// Criteria for professional eligibility.

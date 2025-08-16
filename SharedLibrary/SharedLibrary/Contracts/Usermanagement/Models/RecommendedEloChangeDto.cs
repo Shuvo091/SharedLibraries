@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SharedLibrary.Contracts.Usermanagement.Requests;
+namespace SharedLibrary.Contracts.Usermanagement.Models;
 
 /// <summary>
 /// Data transfer object representing a recommended Elo change for a transcriber.

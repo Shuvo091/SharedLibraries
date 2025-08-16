@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using SharedLibrary.Contracts.Usermanagement.Models;
 
 namespace SharedLibrary.Contracts.Usermanagement.Requests;
 

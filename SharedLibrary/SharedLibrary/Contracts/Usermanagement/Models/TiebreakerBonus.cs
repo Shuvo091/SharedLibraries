@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SharedLibrary.Contracts.Usermanagement.Requests;
+namespace SharedLibrary.Contracts.Usermanagement.Models;
 
 /// <summary>
 /// Details about a tiebreaker bonus in a three-way comparison.
