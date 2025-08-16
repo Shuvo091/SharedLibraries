@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.Contracts.Transcription.Responses
+﻿using SharedLibrary.Contracts.Transcription.Models;
+
+namespace SharedLibrary.Contracts.Transcription.Responses
 {
     /// <summary>
     /// Represents the response after assigning a job to a transcriber.

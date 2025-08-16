@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.Contracts.Transcription.Responses
+﻿namespace SharedLibrary.Contracts.Transcription.Models
 {
     /// <summary>
     /// Represents a workflow step in the transcription completion process.

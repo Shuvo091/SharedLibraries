@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.Contracts.Transcription.Responses
+﻿namespace SharedLibrary.Contracts.Transcription.Models
 {
     /// <summary>
     /// Represents a transcription in the comparison readiness response.

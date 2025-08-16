@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.Contracts.Transcription.Responses
+﻿namespace SharedLibrary.Contracts.Transcription.Models
 {
     /// <summary>
     /// Represents filters applied to available jobs.

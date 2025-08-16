@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.Contracts.Transcription.Responses
+﻿namespace SharedLibrary.Contracts.Transcription.Models
 {
     /// <summary>
     /// Represents Elo configuration settings for admin.
