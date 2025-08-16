@@ -8,10 +8,10 @@ public class TimeRangeDto
     /// <summary>
     /// Gets or sets the start date of the time range.
     /// </summary>
-    public DateTime StartDate { get; set; }
+    required public DateTime StartDate { get; set; }
 
     /// <summary>
     /// Gets or sets the end date of the time range.
     /// </summary>
-    public DateTime EndDate { get; set; }
+    required public DateTime EndDate { get; set; }
 }
