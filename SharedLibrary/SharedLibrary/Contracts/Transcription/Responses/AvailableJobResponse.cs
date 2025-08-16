@@ -1,9 +1,9 @@
 ﻿namespace SharedLibrary.RequestResponseModels.Transcription.Responses
 {
     /// <summary>
-    /// Represents the response after creating a transcription job.
+    /// Represents an available transcription job.
     /// </summary>
-    public class CreateTranscriptionJobResponse
+    public class AvailableJobResponse
     {
         /// <summary>
         /// Gets or sets the job identifier.
@@ -11,9 +11,14 @@
         public Guid JobId { get; set; }
 
         /// <summary>
-        /// Gets or sets the status of the job creation.
+        /// Gets or sets the URI of the audio file.
         /// </summary>
-        public string? Status { get; set; }
+        public string? AudioUri { get; set; }
+
+        /// <summary>
+        /// Gets or sets the audio metadata for the job.
+        /// </summary>
+        public AvailableJobAudioMetadataResponse? AudioMetadata { get; set; }
 
         /// <summary>
         /// Gets or sets the number of transcribers needed for the job.
@@ -31,18 +36,33 @@
         public DateTime? Deadline { get; set; }
 
         /// <summary>
-        /// Gets or sets the URI of the job.
+        /// Gets or sets the priority of the job.
         /// </summary>
-        public string? JobUri { get; set; }
+        public string? Priority { get; set; }
+
+        /// <summary>
+        /// Gets or sets the workflow strategy for the job.
+        /// </summary>
+        public string? WorkflowStrategy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the book out timeout in hours.
+        /// </summary>
+        public int? BookOutTimeoutHours { get; set; }
 
         /// <summary>
         /// Gets or sets the dialect configuration for the job.
         /// </summary>
-        public CreateTranscriptionJobDialectConfigResponse? DialectConfig { get; set; }
+        public AvailableJobDialectConfigResponse? DialectConfig { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether open access is enabled for the job.
         /// </summary>
         public bool? OpenAccessEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date and time when the job was created.
+        /// </summary>
+        public DateTime? CreatedAt { get; set; }
     }
 }
