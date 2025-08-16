@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using SharedLibrary.Cache.Models;
 using SharedLibrary.Common.Options;
+using SharedLibrary.Redis.Models;
 
 namespace SharedLibrary.Common.Extensions;
 

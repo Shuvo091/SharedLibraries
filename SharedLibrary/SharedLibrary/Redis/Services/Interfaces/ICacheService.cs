@@ -1,4 +1,4 @@
-namespace SharedLibrary.Cache.Services.Interfaces
+namespace SharedLibrary.Redis.Services.Interfaces
 {
     /// <summary>
     /// Generic cache service interface for Redis operations.

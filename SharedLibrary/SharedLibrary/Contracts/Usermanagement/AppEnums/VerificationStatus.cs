@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SharedLibrary.AppEnums;
+namespace SharedLibrary.Contracts.Usermanagement.AppEnums;
 
 /// <summary>
 /// Specifies the verification status of a user or entity.

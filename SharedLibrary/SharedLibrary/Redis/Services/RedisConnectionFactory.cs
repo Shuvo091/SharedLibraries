@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Logging;
-using SharedLibrary.Cache.Models;
+using SharedLibrary.Redis.Models;
 using StackExchange.Redis;
 
-namespace SharedLibrary.Cache.Services
+namespace SharedLibrary.Redis.Services
 {
     /// <summary>
     /// Factory class for creating and managing Redis connections.

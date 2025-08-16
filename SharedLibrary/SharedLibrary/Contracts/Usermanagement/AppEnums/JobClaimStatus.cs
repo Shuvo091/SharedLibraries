@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SharedLibrary.AppEnums;
+namespace SharedLibrary.Contracts.Usermanagement.AppEnums;
 
 /// <summary>
 /// Specifies the status of a job claim.

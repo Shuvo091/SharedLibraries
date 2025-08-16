@@ -1,14 +1,12 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SharedLibrary.Cache.Models;
-using SharedLibrary.Cache.Services;
-using SharedLibrary.Cache.Services.Interfaces;
+using SharedLibrary.Redis.Models;
 using SharedLibrary.Redis.Services;
 using SharedLibrary.Redis.Services.Interfaces;
 using StackExchange.Redis;
 
-namespace SharedLibrary.Cache.ServiceCollectionExtensions
+namespace SharedLibrary.Redis.ServiceCollectionExtensions
 {
     /// <summary>
     /// Extension methods for IServiceCollection to configure Redis caching.

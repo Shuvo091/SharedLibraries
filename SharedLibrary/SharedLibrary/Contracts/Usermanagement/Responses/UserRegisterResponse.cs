@@ -1,5 +1,5 @@
-﻿using SharedLibrary.AppEnums;
-using SharedLibrary.Common.Utilities;
+﻿using SharedLibrary.Common.Utilities;
+using SharedLibrary.Contracts.Usermanagement.AppEnums;
 
 namespace SharedLibrary.Contracts.Usermanagement.Responses;
 

@@ -1,8 +1,8 @@
 using System.Text.Json;
 using Microsoft.Extensions.Caching.Distributed;
-using SharedLibrary.Cache.Services.Interfaces;
+using SharedLibrary.Redis.Services.Interfaces;
 
-namespace SharedLibrary.Cache.Services
+namespace SharedLibrary.Redis.Services
 {
     /// <summary>
     /// Cache service based on IDistributedCache.

@@ -1,4 +1,4 @@
-namespace SharedLibrary.Cache.Models
+namespace SharedLibrary.Redis.Models
 {
     /// <summary>
     /// Configuration model for Redis connection settings.
