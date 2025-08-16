@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.RequestResponseModels.Transcription.Requests
+﻿namespace SharedLibrary.Contracts.Transcription.Requests
 {
     /// <summary>
     /// Represents a request to assign a job to a transcriber.

@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.Contracts.Transcription.Responses;
+﻿using SharedLibrary.Contracts.Transcription.Models;
+
+namespace SharedLibrary.Contracts.Transcription.Responses;
 
 /// <summary>
 /// Combined result for audio context.

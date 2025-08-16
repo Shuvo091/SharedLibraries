@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.Contracts.Transcription.Requests;
+﻿using SharedLibrary.Contracts.Transcription.Models;
+
+namespace SharedLibrary.Contracts.Transcription.Requests;
 
 /// <summary>
 /// Represents a request to perform quality checks on a transcription job.

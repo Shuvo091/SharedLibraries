@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.RequestResponseModels.Transcription.Requests
+﻿using SharedLibrary.Contracts.Transcription.Models;
+
+namespace SharedLibrary.Contracts.Transcription.Requests
 {
     /// <summary>
     /// Represents a request to mark a transcription job as complete.

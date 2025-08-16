@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary.RequestResponseModels.Transcription.Responses
+﻿namespace SharedLibrary.Contracts.Transcription.Responses
 {
     /// <summary>
     /// Represents the response containing the state of a transcription job.

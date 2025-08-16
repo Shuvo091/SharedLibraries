@@ -1,4 +1,6 @@
-﻿namespace SharedLibrary.RequestResponseModels.Transcription.Responses
+﻿using SharedLibrary.Contracts.Transcription.Models;
+
+namespace SharedLibrary.Contracts.Transcription.Responses
 {
     /// <summary>
     /// Represents the response containing claimed transcription jobs.
