@@ -102,4 +102,22 @@ public class CounterService : ICounterService
             throw new InvalidOperationException($"Failed to set counter for key '{key}'", ex);
         }
     }
+
+    /// <inheritdoc/>
+    public async Task<bool> DeleteAsync(string key)
+    {
+        if (string.IsNullOrEmpty(key))
+        {
+            throw new ArgumentException("Key cannot be null or empty", nameof(key));
+        }
+
+        try
+        {
+            return await this.database.KeyDeleteAsync(key);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException($"Failed to delete counter for key '{key}'", ex);
+        }
+    }
 }

@@ -33,4 +33,18 @@ public enum ComparisonOutcome
     /// </summary>
     [Display(Name = "draw")]
     Draw = 2,
+
+    /// <summary>
+    /// Indicates a majority winner outcome,
+    /// where the participant has won by a majority vote or decision.
+    /// </summary>
+    [Display(Name = "majority_winner")]
+    Majority_Winner = 3,
+
+    /// <summary>
+    /// Indicates a minority winner outcome,
+    /// where the participant has won by a minority vote or decision.
+    /// </summary>
+    [Display(Name = "minority_loser")]
+    Minority_Loser = 4,
 }

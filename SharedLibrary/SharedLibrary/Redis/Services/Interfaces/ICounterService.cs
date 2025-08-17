@@ -35,4 +35,11 @@ public interface ICounterService
     /// <param name="value">The value to set.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
     Task SetAsync(string key, long value);
+
+    /// <summary>
+    /// Removes the counter for the specified key.
+    /// </summary>
+    /// <param name="key">The key of the counter to remove.</param>
+    /// <returns>A task representing the asynchronous operation. The task result contains true if the key was removed; otherwise, false.</returns>
+    Task<bool> DeleteAsync(string key);
 }
